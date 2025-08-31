@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobsIndia - Find Your Dream Career</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff, #f0f8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 1rem;
+            align-items: end;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #4a5568;
+        }
+
+        .form-control {
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .search-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+        }
+
+        /* Main Content */
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            margin: 2rem 0;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #e2e8f0;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 25px;
+            background: white;
+            color: #4a5568;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Job Cards */
+        .jobs-grid {
+            padding: 2rem;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .job-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .company-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .job-info h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+
+        .company-name {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .job-details {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #4a5568;
+        }
+
+        .job-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .salary {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #38a169;
+        }
+
+        .apply-btn {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .apply-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .search-form {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .filters {
+                justify-content: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .job-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .job-card:nth-child(2) { animation-delay: 0.1s; }
+        .job-card:nth-child(3) { animation-delay: 0.2s; }
+        .job-card:nth-child(4) { animation-delay: 0.3s; }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #667eea;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #e2e8f0;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            padding: 1rem 2rem 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #4a5568;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">JobsIndia</div>
+                <ul class="nav-links">
+                    <li><a href="#jobs">Jobs</a></li>
+                    <li><a href="#companies">Companies</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <a href="#" class="btn btn-secondary">Login</a>
+                    <a href="#" class="btn btn-primary">Sign Up</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Discover Your Next Career Move</h1>
+            <p>Find the best job opportunities across India with top companies</p>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="container">
+        <div class="search-section">
+            <div class="search-form">
+                <div class="form-group">
+                    <label for="job-title">Job Title</label>
+                    <input type="text" id="job-title" class="form-control" placeholder="e.g. Software Engineer">
+                </div>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <select id="location" class="form-control">
+                        <option value="">Select City</option>
+                        <option value="bangalore">Bangalore</option>
+                        <option value="mumbai">Mumbai</option>
+                        <option value="delhi">Delhi</option>
+                        <option value="hyderabad">Hyderabad</option>
+                        <option value="pune">Pune</option>
+                        <option value="chennai">Chennai</option>
+                        <option value="kolkata">Kolkata</option>
+                        <option value="ahmedabad">Ahmedabad</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="experience">Experience</label>
+                    <select id="experience" class="form-control">
+                        <option value="">Any Experience</option>
+                        <option value="0-1">0-1 years</option>
+                        <option value="1-3">1-3 years</option>
+                        <option value="3-5">3-5 years</option>
+                        <option value="5-10">5-10 years</option>
+                        <option value="10+">10+ years</option>
+                    </select>
+                </div>
+                <button class="search-btn" onclick="searchJobs()">Search Jobs</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="container">
+        <div class="main-content">
+            <div class="content-header">
+                <h2>Latest Job Opportunities</h2>
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-jobs">1,247</div>
+                        <div class="stat-label">Active Jobs</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">350+</div>
+                        <div class="stat-label">Companies</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">25,000+</div>
+                        <div class="stat-label">Job Seekers</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters">
+                <button class="filter-btn active" onclick="filterJobs('all')">All Jobs</button>
+                <button class="filter-btn" onclick="filterJobs('tech')">Technology</button>
+                <button class="filter-btn" onclick="filterJobs('finance')">Finance</button>
+                <button class="filter-btn" onclick="filterJobs('marketing')">Marketing</button>
+                <button class="filter-btn" onclick="filterJobs('design')">Design</button>
+                <button class="filter-btn" onclick="filterJobs('sales')">Sales</button>
+                <button class="filter-btn" onclick="filterJobs('remote')">Remote</button>
+            </div>
+
+            <!-- Jobs Grid -->
+            <div class="jobs-grid" id="jobs-container">
+                <!-- Jobs will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Sample job data
+        const jobsData = [
+            {
+                id: 1,
+                title: "Senior Software Engineer",
+                company: "TCS",
+                location: "Bangalore",
+                type: "Full-time",
+                experience: "3-5 years",
+                salary: "₹12-18 LPA",
+                category: "tech",
+                skills: ["JavaScript", "React", "Node.js"],
+                description: "Join our team to build next-generation web applications.",
+                posted: "2 days ago"
+            },
+            {
+                id: 2,
+                title: "Data Scientist",
+                company: "Infosys",
+                location: "Hyderabad",
+                type: "Full-time",
+                experience: "2-4 years",
+                salary: "₹15-22 LPA",
+                category: "tech",
+                skills: ["Python", "Machine Learning", "SQL"],
+                description: "Work on cutting-edge AI and ML projects.",
+                posted: "1 day ago"
+            },
+            {
+                id: 3,
+                title: "Digital Marketing Manager",
+                company: "Flipkart",
+                location: "Mumbai",
+                type: "Full-time",
+                experience: "4-6 years",
+                salary: "₹18-25 LPA",
+                category: "marketing",
+                skills: ["SEO", "SEM", "Analytics"],
+                description: "Drive digital marketing strategies for India's largest e-commerce platform.",
+                posted: "3 days ago"
+            },
+            {
+                id: 4,
+                title: "UX Designer",
+                company: "Swiggy",
+                location: "Bangalore",
+                type: "Full-time",
+                experience: "2-4 years",
+                salary: "₹10-16 LPA",
+                category: "design",
+                skills: ["Figma", "User Research", "Prototyping"],
+                description: "Design delightful user experiences for millions of users.",
+                posted: "4 days ago"
+            },
+            {
+                id: 5,
+                title: "Financial Analyst",
+                company: "HDFC Bank",
+                location: "Delhi",
+                type: "Full-time",
+                experience: "1-3 years",
+                salary: "₹8-12 LPA",
+                category: "finance",
+                skills: ["Excel", "Financial Modeling", "Risk Analysis"],
+                description: "Analyze financial data and provide insights for strategic decisions.",
+                posted: "5 days ago"
+            },
+            {
+                id: 6,
+                title: "Frontend Developer",
+                company: "Zomato",
+                location: "Remote",
+                type: "Remote",
+                experience: "2-4 years",
+                salary: "₹12-20 LPA",
+                category: "tech",
+                skills: ["Vue.js", "TypeScript", "CSS"],
+                description: "Build responsive web applications that serve millions of users.",
+                posted: "1 day ago"
+            },
+            {
+                id: 7,
+                title: "Sales Manager",
+                company: "Reliance",
+                location: "Mumbai",
+                type: "Full-time",
+                experience: "5-8 years",
+                salary: "₹20-30 LPA",
+                category: "sales",
+                skills: ["B2B Sales", "Team Management", "CRM"],
+                description: "Lead sales team and drive revenue growth in retail sector.",
+                posted: "6 days ago"
+            },
+            {
+                id: 8,
+                title: "DevOps Engineer",
+                company: "Wipro",
+                location: "Pune",
+                type: "Full-time",
+                experience: "3-6 years",
+                salary: "₹14-22 LPA",
+                category: "tech",
+                skills: ["AWS", "Docker", "Kubernetes"],
+                description: "Manage cloud infrastructure and deployment pipelines.",
+                posted: "2 days ago"
+            }
+        ];
+
+        let filteredJobs = [...jobsData];
+
+        // Render jobs
+        function renderJobs(jobs) {
+            const container = document.getElementById('jobs-container');
+            
+            if (jobs.length === 0) {
+                container.innerHTML = '<div class="loading">No jobs found matching your criteria.</div>';
+                return;
+            }
+
+            container.innerHTML = jobs.map(job => `
+                <div class="job-card" onclick="openJobDetails(${job.id})">
+                    <div class="job-header">
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <div class="company-logo">${job.company.charAt(0)}</div>
+                            <div class="job-info">
+                                <h3>${job.title}</h3>
+                                <div class="company-name">${job.company}</div>
+                            </div>
+                        </div>
+                        <div class="salary">${job.salary}</div>
+                    </div>
+                    
+                    <div class="job-details">
+                        <div class="detail-item">
+                            <span>📍</span>
+                            <span>${job.location}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>💼</span>
+                            <span>${job.type}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>⏱️</span>
+                            <span>${job.experience}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>📅</span>
+                            <span>${job.posted}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="job-tags">
+                        ${job.skills.map(skill => `<span class="tag">${skill}</span>`).join('')}
+                    </div>
+                    
+                    <p style="color: #4a5568; margin-bottom: 1rem;">${job.description}</p>
+                    
+                    <button class="apply-btn" onclick="applyToJob(${job.id}, event)">Apply Now</button>
+                </div>
+            `).join('');
+        }
+
+        // Filter jobs
+        function filterJobs(category) {
+            // Update filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Show loading
+            document.getElementById('jobs-container').innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <div>Finding jobs...</div>
+                </div>
+            `;
+
+            // Filter and render jobs with delay for loading effect
+            setTimeout(() => {
+                if (category === 'all') {
+                    filteredJobs = [...jobsData];
+                } else if (category === 'remote') {
+                    filteredJobs = jobsData.filter(job => job.type === 'Remote');
+                } else {
+                    filteredJobs = jobsData.filter(job => job.category === category);
+                }
+                
+                renderJobs(filteredJobs);
+                updateJobCount();
+            }, 500);
+        }
+
+        // Search jobs
+        function searchJobs() {
+            const title = document.getElementById('job-title').value.toLowerCase();
+            const location = document.getElementById('location').value;
+            const experience = document.getElementById('experience').value;
+
+            // Show loading
+            document.getElementById('jobs-container').innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <div>Searching jobs...</div>
+                </div>
+            `;
+
+            setTimeout(() => {
+                filteredJobs = jobsData.filter(job => {
+                    const matchesTitle = !title || job.title.toLowerCase().includes(title) || 
+                                       job.skills.some(skill => skill.toLowerCase().includes(title));
+                    const matchesLocation = !location || job.location.toLowerCase() === location;
+                    const matchesExperience = !experience || job.experience.includes(experience);
+                    
+                    return matchesTitle && matchesLocation && matchesExperience;
+                });
+                
+                renderJobs(filteredJobs);
+                updateJobCount();
+            }, 800);
+        }
+
+        // Update job count
+        function updateJobCount() {
+            document.getElementById('total-jobs').textContent = filteredJobs.length.toLocaleString();
+        }
+
+        // Apply to job
+        function applyToJob(jobId, event) {
+            event.stopPropagation();
+            const job = jobsData.find(j => j.id === jobId);
+            alert(`Applying to ${job.title} at ${job.company}!\n\nThis would typically redirect to an application form or external careers page.`);
+        }
+
+        // Open job details
+        function openJobDetails(jobId) {
+            const job = jobsData.find(j => j.id === jobId);
+            alert(`Job Details:\n\nTitle: ${job.title}\nCompany: ${job.company}\nLocation: ${job.location}\nSalary: ${job.salary}\nExperience: ${job.experience}\n\nDescription: ${job.description}\n\nSkills: ${job.skills.join(', ')}`);
+        }
+
+        // Add keyboard support for search
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInputs = document.querySelectorAll('.form-control');
+            searchInputs.forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        searchJobs();
+                    }
+                });
+            });
+
+            // Initial render
+            renderJobs(filteredJobs);
+            
+            // Add smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Add header scroll effect
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('.header');
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(255, 255, 255, 0.98)';
+                    header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+                } else {
+                    header.style.background = 'rgba(255, 255, 255, 0.95)';
+                    header.style.boxShadow = 'none';
+                }
+            });
+        });
+
+        // Simulate real-time job updates
+        setInterval(() => {
+            const randomJob = jobsData[Math.floor(Math.random() * jobsData.length)];
+            randomJob.posted = 'Just now';
+            if (document.getElementById('jobs-container').children.length > 0) {
+                // Subtle indication of updates without re-rendering
+                console.log(`New job update: ${randomJob.title} at ${randomJob.company}`);
+            }
+        }, 30000);
+    </script>
+</body>
+</html>
