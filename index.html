@@ -841,6 +841,25 @@
             }
         }, 30000);
     </script>
-    <script src = "index.js"> </script>
+     <!-- ADD THIS SCRIPT HERE -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Find all links
+        document.querySelectorAll('a[href]').forEach(function(link) {
+            const href = link.getAttribute('href');
+            
+            // Skip internal anchors, email, and phone links
+            if (href.startsWith('#') || 
+                href.startsWith('mailto:') || 
+                href.startsWith('tel:')) {
+                return;
+            }
+            
+            // Make link open in new tab
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'noopener noreferrer');
+        });
+    });
+    </script>
 </body>
 </html>
